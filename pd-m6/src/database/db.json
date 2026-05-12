@@ -3,5 +3,12 @@
         "id": 1,
         "name": "Product - 1",
         "price": 1000
+    },
+    {
+        "id": 1778608765238,
+        "name": "4K Monitor",
+        "category": "Display",
+        "brand": "Dell",
+        "price": 450
     }
 ]
