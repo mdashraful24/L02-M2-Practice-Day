@@ -1,8 +1,8 @@
 [
     {
         "id": 1,
-        "name": "Product - 1",
-        "price": 1000
+        "name": "Redmi Note 10 Pro",
+        "price": 22000
     },
     {
         "id": 1778608765238,
@@ -10,5 +10,12 @@
         "category": "Display",
         "brand": "Dell",
         "price": 450
+    },
+    {
+        "id": 1778611226406,
+        "name": "1K Monitor",
+        "category": "Display",
+        "brand": "Dell",
+        "price": 250
     }
 ]
