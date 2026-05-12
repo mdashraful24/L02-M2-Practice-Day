@@ -1,6 +1,6 @@
-import { createServer, type IncomingMessage, type Server } from "http";
+import { createServer, ServerResponse, type IncomingMessage, type Server } from "http";
 
-const server: Server = createServer((req: IncomingMessage, res) => {
+const server: Server = createServer((req: IncomingMessage, res: ServerResponse) => {
     console.log(req);
 });
 
