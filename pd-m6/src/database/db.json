@@ -1,1 +1,9 @@
-[{"id":1778608765238,"name":"4K Monitor","category":"Display","brand":"Dell","price":450}]
+[
+    {
+        "id": 1778608765238,
+        "name": "4K Monitor",
+        "category": "Display",
+        "brand": "Dell",
+        "price": 450
+    }
+]
