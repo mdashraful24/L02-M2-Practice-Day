@@ -140,8 +140,7 @@ app.put("/api/users/:id", async (req: Request, res: Response) => {
         if (result.rows.length === 0) {
             res.status(404).json({
                 success: false,
-                message: "Users not found!",
-                data: {}
+                message: "Users not found!"
             })
         }
 
@@ -159,7 +158,33 @@ app.put("/api/users/:id", async (req: Request, res: Response) => {
     }
 })
 
+app.delete("/api/users/:email", async (req: Request, res: Response) => {
+    const { email } = req.params
+req
+    try {
+        const result = await pool.query(`
+            DELETE FROM users WHERE email=$1
+        `, [email])
 
+        if (result.rowCount === 0) {
+            res.status(404).json({
+                success: false,
+                message: "User not found!"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "User deleted successfully!"
+        })
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+            data: error
+        });
+    }
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
