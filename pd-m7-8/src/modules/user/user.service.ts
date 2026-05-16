@@ -1,6 +1,7 @@
 import { pool } from "../../db"
+import type { IUser } from "./user.interface"
 
-const createUserIntoDB = async (payload: any) => {
+const createUserIntoDB = async (payload: IUser) => {
 
     const { name, email, password, age } = payload
 
@@ -29,7 +30,7 @@ const getSingleUserFromDB = async (id: string) => {
     return result
 }
 
-const updateUserInfoFromDB = async (payload: any, id: string) => {
+const updateUserInfoFromDB = async (payload: IUser, id: string) => {
 
     const { name, password, age, is_active } = payload
 
