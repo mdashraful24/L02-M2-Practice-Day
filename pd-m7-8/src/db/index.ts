@@ -31,6 +31,7 @@ export const initDB = async () => {
 
             bio TEXT,
             address TEXT,
+            phone VARCHAR(15),
             gender VARCHAR(10),
 
             created_at TIMESTAMP DEFAULT NOW(),
