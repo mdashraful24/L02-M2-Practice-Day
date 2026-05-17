@@ -1,40 +1,25 @@
-import { pool } from "../../db"
-import type { IUser } from "./user.interface"
-
-
-const createUserIntoDB = async (payload: IUser) => {
-
-    const { name, email, password, age } = payload
-
+import { pool } from "../../db";
+const createUserIntoDB = async (payload) => {
+    const { name, email, password, age } = payload;
     const result = await pool.query(`
             INSERT INTO users (name, email, password, age) VALUES($1,$2,$3,$4) RETURNING *
-        `, [name, email, password, age]
-    )
-
-    return result
-}
-
+        `, [name, email, password, age]);
+    return result;
+};
 const getAllUsersFromDB = async () => {
     const result = await pool.query(`
             SELECT * FROM users
-        `)
-
-    return result
-}
-
-const getSingleUserFromDB = async (id: string) => {
+        `);
+    return result;
+};
+const getSingleUserFromDB = async (id) => {
     const result = await pool.query(`
             SELECT * FROM users WHERE id=$1
-        `, [id]
-    )
-
-    return result
-}
-
-const updateUserInfoFromDB = async (payload: IUser, id: string) => {
-
-    const { name, password, age, is_active } = payload
-
+        `, [id]);
+    return result;
+};
+const updateUserInfoFromDB = async (payload, id) => {
+    const { name, password, age, is_active } = payload;
     const result = await pool.query(`
             UPDATE users SET
             name=COALESCE($1,name),
@@ -42,26 +27,20 @@ const updateUserInfoFromDB = async (payload: IUser, id: string) => {
             age=COALESCE($3,age), 
             is_active=COALESCE($4,is_active)
             WHERE id=$5 RETURNING *
-        `, [name, password, age, is_active, id]
-    )
-
-    return result
-}
-
-const deleteUserFromDB = async (id: string) => {
+        `, [name, password, age, is_active, id]);
+    return result;
+};
+const deleteUserFromDB = async (id) => {
     const result = await pool.query(`
             DELETE FROM users WHERE id=$1
-        `, [id]
-    )
-
-    return result
-}
-
-
+        `, [id]);
+    return result;
+};
 export const userService = {
     createUserIntoDB,
     getAllUsersFromDB,
     getSingleUserFromDB,
     updateUserInfoFromDB,
     deleteUserFromDB
-}
+};
+//# sourceMappingURL=user.service.js.map
