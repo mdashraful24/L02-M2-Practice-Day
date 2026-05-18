@@ -23,6 +23,26 @@ const createUser: TypeController = async (req, res) => {
     }
 }
 
+const createMultipleUser: TypeController = async (req, res) => {
+    try {
+        const result = await userService.createMultipleUserIntoDB(req.body)
+
+        sendResponse(res, {
+            statusCode: 201,
+            success: true,
+            message: "User created successfully!",
+            data: result,
+        })
+    } catch (error: any) {
+        sendResponse(res, {
+            statusCode: 500,
+            success: false,
+            message: error.message,
+            error: error,
+        })
+    }
+}
+
 const getAllUsers: TypeController = async (req, res) => {
     try {
         const result = await userService.getAllUsersFromDB()
@@ -147,6 +167,7 @@ const deleteUser: TypeController = async (req, res) => {
 
 export const userController = {
     createUser,
+    createMultipleUser,
     getAllUsers,
     getSingleUser,
     updateUserInfo,

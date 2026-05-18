@@ -18,6 +18,31 @@ const createUserIntoDB = async (payload: IUser) => {
     return result
 }
 
+const createMultipleUserIntoDB = async (payload: IUser[]) => {
+
+    const users = await Promise.all(
+        payload.map(async (user) => {
+
+            const hashPassword = await bcrypt.hash(user.password, 10)
+
+            const result = await pool.query(`
+                INSERT INTO users (name, email, password, age)
+                VALUES ($1, $2, $3, $4)
+                RETURNING id, name, email, age
+            `, [user.name, user.email, hashPassword, user.age]
+            )
+
+            const createUser = result.rows[0]
+
+            delete createUser.password
+
+            return createUser
+        })
+    )
+
+    return users
+}
+
 const getAllUsersFromDB = async () => {
     const result = await pool.query(`
             SELECT * FROM users
@@ -72,6 +97,7 @@ const deleteUserFromDB = async (id: string) => {
 
 export const userService = {
     createUserIntoDB,
+    createMultipleUserIntoDB,
     getAllUsersFromDB,
     getSingleUserFromDB,
     updateUserInfoFromDB,
