@@ -1,6 +1,7 @@
 import { pool } from "../../db"
+import type { IProfile } from "./profile.interface"
 
-const createProfileIntoDB = async (payload: any) => {
+const createProfileIntoDB = async (payload: IProfile) => {
 
     const { user_id, bio, address, phone, gender } = payload
 
@@ -18,11 +19,67 @@ const createProfileIntoDB = async (payload: any) => {
         `, [user_id, bio, address, phone, gender]
     )
 
+    delete result.rows[0].user_id
+
+    return result
+}
+
+const getAllProfilesFromDB = async () => {
+    const result = await pool.query(`
+            SELECT * FROM profiles
+        `)
+
+    result.rows.forEach((profile) => {
+        delete profile.user_id
+    })
+
+    return result
+}
+
+const getSingleProfileFromDB = async (id: string) => {
+    const result = await pool.query(`
+        SELECT * FROM profiles WHERE id=$1
+    `, [id]
+    )
+
+    delete result.rows[0].user_id
+
+    return result
+}
+
+const updateProfileInfoFromDB = async (payload: IProfile, id: string) => {
+
+    const { bio, address, phone, gender } = payload
+
+    const result = await pool.query(`
+                UPDATE profiles SET
+                bio=COALESCE($1,bio),
+                address=COALESCE($2,address),
+                phone=COALESCE($3,phone),
+                gender=COALESCE($4,gender)
+                WHERE id=$5 RETURNING *
+            `, [bio, address, phone, gender, id]
+    )
+
+    delete result.rows[0].user_id
+
+    return result
+}
+
+const deleteProfileFromDB = async (id: string) => {
+    const result = await pool.query(`
+            DELETE FROM profiles WHERE id=$1
+        `, [id]
+    )
+
     return result
 }
 
 
 export const profileService = {
     createProfileIntoDB,
-
+    getAllProfilesFromDB,
+    getSingleProfileFromDB,
+    updateProfileInfoFromDB,
+    deleteProfileFromDB
 }

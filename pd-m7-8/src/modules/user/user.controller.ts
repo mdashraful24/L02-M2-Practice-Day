@@ -1,9 +1,8 @@
-import type { Request, Response } from "express";
 import { userService } from "./user.service";
 import { sendResponse } from "../../utils/sendResponse";
+import type { TypeController } from "../../types/express.types";
 
-
-const createUser = async (req: Request, res: Response) => {
+const createUser: TypeController = async (req, res) => {
 
     try {
         const result = await userService.createUserIntoDB(req.body)
@@ -24,7 +23,7 @@ const createUser = async (req: Request, res: Response) => {
     }
 }
 
-const getAllUsers = async (req: Request, res: Response) => {
+const getAllUsers: TypeController = async (req, res) => {
     try {
         const result = await userService.getAllUsersFromDB()
 
@@ -53,7 +52,7 @@ const getAllUsers = async (req: Request, res: Response) => {
     }
 }
 
-const getSingleUser = async (req: Request, res: Response) => {
+const getSingleUser: TypeController = async (req, res) => {
 
     const { id } = req.params
 
@@ -85,7 +84,7 @@ const getSingleUser = async (req: Request, res: Response) => {
     }
 }
 
-const updateUserInfo = async (req: Request, res: Response) => {
+const updateUserInfo: TypeController = async (req, res) => {
 
     const { id } = req.params
 
@@ -116,9 +115,9 @@ const updateUserInfo = async (req: Request, res: Response) => {
     }
 }
 
-const deleteUser = async (req: Request, res: Response) => {
+const deleteUser: TypeController = async (req, res) => {
     const { id } = req.params
-    req
+
     try {
         const result = await userService.deleteUserFromDB(id as string)
 
