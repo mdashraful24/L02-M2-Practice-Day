@@ -9,7 +9,7 @@ const createUserIntoDB = async (payload: IUser) => {
     const hashPassword = await bcrypt.hash(password, 10)
 
     const result = await pool.query(`
-            INSERT INTO users (name, email, password, age, role) VALUES($1,$2,$3,$4, COALESCE($5,'user')) RETURNING *
+            INSERT INTO users (name, email, password, age, role) VALUES($1, $2, $3, $4, COALESCE($5,'user')) RETURNING *
         `, [name, email, hashPassword, age, role]
     )
 
@@ -27,7 +27,7 @@ const createMultipleUserIntoDB = async (payload: IUser[]) => {
 
             const result = await pool.query(`
                 INSERT INTO users (name, email, password, age, role)
-                VALUES ($1, $2, $3, $4, $5)
+                VALUES ($1, $2, $3, $4, COALESCE($5,'user'))
                 RETURNING id, name, email, age, role
             `, [user.name, user.email, hashPassword, user.age, user.role]
             )

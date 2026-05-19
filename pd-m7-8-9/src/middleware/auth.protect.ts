@@ -3,8 +3,9 @@ import jwt, { type JwtPayload } from "jsonwebtoken";
 import { sendResponse } from "../utils/sendResponse";
 import config from "../config";
 import { pool } from "../db";
+import type { ROLES } from "../types/express.types";
 
-const protectedAuth = () => {
+const protectedAuth = (...roles: ROLES[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
 
@@ -12,6 +13,7 @@ const protectedAuth = () => {
             // * 2. Verify the token
             // * 3. Find the user into the database
             // * 4. If the user active or not?
+            // * 5. if Roles exist and is Roles match user.role
 
             const token = req.headers.authorization
 
@@ -41,6 +43,14 @@ const protectedAuth = () => {
             }
 
             if (!user?.is_active) {
+                sendResponse(res, {
+                    statusCode: 403,
+                    success: false,
+                    message: "Forbidden!!"
+                })
+            }
+
+            if (roles.length && !roles.includes(user.role)) {
                 sendResponse(res, {
                     statusCode: 403,
                     success: false,

@@ -28,6 +28,7 @@ const loginUserIntoDB = async (payload: IAuth) => {
         id: user.id,
         name: user.name,
         email: user.email,
+        role: user.role,
         is_active: user.is_active
     }
 
