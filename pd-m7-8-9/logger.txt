@@ -1,0 +1,10 @@
+┌───────────────────────────────────────────────
+│ Time       : 5/19/2026, 6:28:04 PM
+│ Method     : GET
+│ URL        : /api/users
+│ Status     : 200
+│ IP Address : ::1
+│ User Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+│ Duration   : 3975ms
+└───────────────────────────────────────────────
+
