@@ -25,7 +25,7 @@ const protectedAuth = (...roles: ROLES[]) => {
                 })
             }
 
-            const decoded = jwt.verify(token as string, config.access_token) as JwtPayload
+            const decoded = jwt.verify(token as string, config.access_secret) as JwtPayload
 
             const userData = await pool.query(`
             SELECT * FROM users WHERE email=$1

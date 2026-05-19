@@ -34,8 +34,29 @@ const loginUser: TypeController = async (req, res) => {
     }
 }
 
+const refreshToken: TypeController = async (req, res) => {
+    try {
+        const result = await authService.generateRefreshToken(req.cookies["refresh-token"])
+
+        sendResponse(res, {
+            statusCode: 200,
+            success: true,
+            message: "Access token generate successfully!",
+            data: result
+        })
+    } catch (error: any) {
+        sendResponse(res, {
+            statusCode: 500,
+            success: false,
+            message: error.message,
+            error: error,
+        })
+    }
+}
+
 
 export const authController = {
     loginUser,
+    refreshToken,
 
 }
