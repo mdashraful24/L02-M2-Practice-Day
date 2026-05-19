@@ -4,13 +4,13 @@ import type { IUser } from "./user.interface"
 
 const createUserIntoDB = async (payload: IUser) => {
 
-    const { name, email, password, age } = payload
+    const { name, email, password, age, role } = payload
 
     const hashPassword = await bcrypt.hash(password, 10)
 
     const result = await pool.query(`
-            INSERT INTO users (name, email, password, age) VALUES($1,$2,$3,$4) RETURNING *
-        `, [name, email, hashPassword, age]
+            INSERT INTO users (name, email, password, age, role) VALUES($1,$2,$3,$4, COALESCE($5,'user')) RETURNING *
+        `, [name, email, hashPassword, age, role]
     )
 
     delete result.rows[0].password
@@ -26,15 +26,15 @@ const createMultipleUserIntoDB = async (payload: IUser[]) => {
             const hashPassword = await bcrypt.hash(user.password, 10)
 
             const result = await pool.query(`
-                INSERT INTO users (name, email, password, age)
-                VALUES ($1, $2, $3, $4)
-                RETURNING id, name, email, age
-            `, [user.name, user.email, hashPassword, user.age]
+                INSERT INTO users (name, email, password, age, role)
+                VALUES ($1, $2, $3, $4, $5)
+                RETURNING id, name, email, age, role
+            `, [user.name, user.email, hashPassword, user.age, user.role]
             )
 
             const createUser = result.rows[0]
 
-            delete createUser.password
+            delete createUser.password, createUser.role
 
             return createUser
         })
@@ -68,16 +68,17 @@ const getSingleUserFromDB = async (id: string) => {
 
 const updateUserInfoFromDB = async (payload: IUser, id: string) => {
 
-    const { name, password, age, is_active } = payload
+    const { name, password, age, role, is_active } = payload
 
     const result = await pool.query(`
             UPDATE users SET
             name=COALESCE($1,name),
             password=COALESCE($2,password), 
             age=COALESCE($3,age), 
-            is_active=COALESCE($4,is_active)
-            WHERE id=$5 RETURNING *
-        `, [name, password, age, is_active, id]
+            role=COALESCE($4,role),
+            is_active=COALESCE($5,is_active)
+            WHERE id=$6 RETURNING *
+        `, [name, password, age, role, is_active, id]
     )
 
     delete result.rows[0].password
