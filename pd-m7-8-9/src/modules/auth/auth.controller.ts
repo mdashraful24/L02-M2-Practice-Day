@@ -10,6 +10,14 @@ const loginUser: TypeController = async (req, res) => {
 
         const result = await authService.loginUserIntoDB(req.body)
 
+        const { refreshToken } = result
+
+        res.cookie("refresh-token", refreshToken, {
+            secure: false,
+            httpOnly: true,
+            sameSite: "lax"
+        })
+
         sendResponse(res, {
             statusCode: 200,
             success: true,

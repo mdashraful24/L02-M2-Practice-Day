@@ -8,7 +8,8 @@ dotenv.config({
 const config = {
     connection_string: process.env.DB_CONNECTION as string,
     port: process.env.PORT,
-    access_token: process.env.JWT_SECRET as string
+    access_token: process.env.ACCESS_TOKEN as string,
+    refresh_token: process.env.REFRESH_TOKEN as string,
 }
 
 export default config;

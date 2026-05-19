@@ -768,3 +768,43 @@
 │ Duration   : 3708ms
 └───────────────────────────────────────────────
 
+┌───────────────────────────────────────────────
+│ Time       : 5/20/2026, 2:31:17 AM
+│ Method     : POST
+│ URL        : /api/auth/login
+│ Status     : 200
+│ IP Address : ::1
+│ User Agent : PostmanRuntime/7.54.0
+│ Duration   : 859ms
+└───────────────────────────────────────────────
+
+┌───────────────────────────────────────────────
+│ Time       : 5/20/2026, 2:31:44 AM
+│ Method     : POST
+│ URL        : /api/auth/login
+│ Status     : 200
+│ IP Address : ::1
+│ User Agent : PostmanRuntime/7.54.0
+│ Duration   : 4215ms
+└───────────────────────────────────────────────
+
+┌───────────────────────────────────────────────
+│ Time       : 5/20/2026, 2:32:06 AM
+│ Method     : POST
+│ URL        : /api/auth/login
+│ Status     : 200
+│ IP Address : ::1
+│ User Agent : PostmanRuntime/7.54.0
+│ Duration   : 4179ms
+└───────────────────────────────────────────────
+
+┌───────────────────────────────────────────────
+│ Time       : 5/20/2026, 2:33:27 AM
+│ Method     : POST
+│ URL        : /api/auth/login
+│ Status     : 200
+│ IP Address : ::1
+│ User Agent : PostmanRuntime/7.54.0
+│ Duration   : 4184ms
+└───────────────────────────────────────────────
+

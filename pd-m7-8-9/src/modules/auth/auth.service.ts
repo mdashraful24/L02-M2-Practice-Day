@@ -33,10 +33,14 @@ const loginUserIntoDB = async (payload: IAuth) => {
     }
 
     const accessToken = jwt.sign(jwtPayload, config.access_token, {
+        expiresIn: "15m"
+    })
+
+    const refreshToken = jwt.sign(jwtPayload, config.refresh_token, {
         expiresIn: "1d"
     })
 
-    return { accessToken }
+    return { accessToken, refreshToken }
 }
 
 export const authService = {
