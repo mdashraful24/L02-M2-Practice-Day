@@ -3,7 +3,8 @@ export const sendResponse = (res, data) => {
         success: data.success,
         message: data.message,
         data: data.data,
-        error: data.error
+        error: data.error,
+        author: data.author
     });
 };
 //# sourceMappingURL=sendResponse.js.map

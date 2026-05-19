@@ -1,5 +1,9 @@
-import type { Request, Response } from "express";
+import type { TypeController } from "../../types/express.types";
 export declare const profileController: {
-    createProfile: (req: Request, res: Response) => Promise<void>;
+    createProfile: TypeController;
+    getAllProfiles: TypeController;
+    getSingleProfile: TypeController;
+    updateProfileInfo: TypeController;
+    deleteProfile: TypeController;
 };
 //# sourceMappingURL=profile.controller.d.ts.map

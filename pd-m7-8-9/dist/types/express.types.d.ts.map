@@ -1,0 +1,1 @@
+{"version":3,"file":"express.types.d.ts","sourceRoot":"","sources":["../../src/types/express.types.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAA;AAEhD,MAAM,MAAM,cAAc,GAAG,CACzB,GAAG,EAAE,OAAO,EACZ,GAAG,EAAE,QAAQ,KACZ,OAAO,CAAC,IAAI,CAAC,CAAA;AAGlB,eAAO,MAAM,SAAS;;;;CAIZ,CAAA;AAGV,MAAM,MAAM,KAAK,GAAG,OAAO,GAAG,OAAO,GAAG,MAAM,CAAA"}

@@ -19,6 +19,25 @@ const createUser = async (req, res) => {
         });
     }
 };
+const createMultipleUser = async (req, res) => {
+    try {
+        const result = await userService.createMultipleUserIntoDB(req.body);
+        sendResponse(res, {
+            statusCode: 201,
+            success: true,
+            message: "User created successfully!",
+            data: result,
+        });
+    }
+    catch (error) {
+        sendResponse(res, {
+            statusCode: 500,
+            success: false,
+            message: error.message,
+            error: error,
+        });
+    }
+};
 const getAllUsers = async (req, res) => {
     try {
         const result = await userService.getAllUsersFromDB();
@@ -103,7 +122,6 @@ const updateUserInfo = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
     const { id } = req.params;
-    req;
     try {
         const result = await userService.deleteUserFromDB(id);
         if (result.rowCount === 0) {
@@ -130,6 +148,7 @@ const deleteUser = async (req, res) => {
 };
 export const userController = {
     createUser,
+    createMultipleUser,
     getAllUsers,
     getSingleUser,
     updateUserInfo,

@@ -1,9 +1,10 @@
-import type { Request, Response } from "express";
+import type { TypeController } from "../../types/express.types";
 export declare const userController: {
-    createUser: (req: Request, res: Response) => Promise<void>;
-    getAllUsers: (req: Request, res: Response) => Promise<void>;
-    getSingleUser: (req: Request, res: Response) => Promise<void>;
-    updateUserInfo: (req: Request, res: Response) => Promise<void>;
-    deleteUser: (req: Request, res: Response) => Promise<void>;
+    createUser: TypeController;
+    createMultipleUser: TypeController;
+    getAllUsers: TypeController;
+    getSingleUser: TypeController;
+    updateUserInfo: TypeController;
+    deleteUser: TypeController;
 };
 //# sourceMappingURL=user.controller.d.ts.map
